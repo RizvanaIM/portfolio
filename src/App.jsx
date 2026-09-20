@@ -3,6 +3,8 @@ import { motion } from 'framer-motion';
 import { 
   personalDetails, 
   stats, 
+  services,
+  collaborationBanner,
   experiences, 
   projects, 
   skillCategories, 
@@ -19,7 +21,12 @@ import {
   Sparkles, 
   ArrowUpRight, 
   CheckCircle2, 
-  Download
+  Download,
+  CreditCard,
+  Globe,
+  Video,
+  Handshake,
+  Check
 } from 'lucide-react';
 
 // Official GitHub & LinkedIn SVG Icons
@@ -52,12 +59,25 @@ export default function App() {
     }
   };
 
+  const getServiceIcon = (index) => {
+    switch (index) {
+      case 0:
+        return <CreditCard className="text-cyan-400" size={28} />;
+      case 1:
+        return <Globe className="text-teal-400" size={28} />;
+      case 2:
+        return <Video className="text-emerald-400" size={28} />;
+      default:
+        return <Sparkles className="text-cyan-400" size={28} />;
+    }
+  };
+
   return (
     <div className="relative min-h-screen bg-[#030712] text-slate-100 overflow-hidden">
       {/* Dynamic Background Glows */}
       <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[800px] h-[500px] bg-gradient-to-tr from-cyan-600/20 via-teal-500/15 to-emerald-500/10 blur-[130px] rounded-full pointer-events-none -z-10" />
-      <div className="absolute top-[40%] right-[-150px] w-[500px] h-[500px] bg-cyan-700/10 blur-[150px] rounded-full pointer-events-none -z-10" />
-      <div className="absolute top-[75%] left-[-150px] w-[500px] h-[500px] bg-emerald-600/10 blur-[150px] rounded-full pointer-events-none -z-10" />
+      <div className="absolute top-[35%] right-[-150px] w-[500px] h-[500px] bg-cyan-700/10 blur-[150px] rounded-full pointer-events-none -z-10" />
+      <div className="absolute top-[65%] left-[-150px] w-[500px] h-[500px] bg-emerald-600/10 blur-[150px] rounded-full pointer-events-none -z-10" />
 
       {/* Floating Modern Header */}
       <header className="fixed top-4 inset-x-0 z-50 flex justify-center px-4">
@@ -67,6 +87,7 @@ export default function App() {
           </a>
           <div className="hidden md:flex items-center gap-5 text-slate-300 font-medium">
             <a href="#about" className="hover:text-cyan-400 transition">About</a>
+            <a href="#services" className="hover:text-cyan-400 transition">Services</a>
             <a href="#experience" className="hover:text-cyan-400 transition">Experience</a>
             <a href="#projects" className="hover:text-cyan-400 transition">Projects</a>
             <a href="#skills" className="hover:text-cyan-400 transition">Skills</a>
@@ -82,7 +103,7 @@ export default function App() {
       </header>
 
       {/* Hero Section */}
-      <section id="about" className="pt-36 pb-20 px-6 max-w-6xl mx-auto flex flex-col items-center text-center">
+      <section id="about" className="pt-36 pb-16 px-6 max-w-6xl mx-auto flex flex-col items-center text-center">
         <motion.div
           initial="hidden"
           animate="visible"
@@ -90,7 +111,7 @@ export default function App() {
           className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full border border-teal-500/30 bg-teal-500/10 text-teal-300 text-xs font-medium tracking-wide mb-6 backdrop-blur-md"
         >
           <Sparkles size={14} className="text-teal-400" />
-          Available for Software Engineering Opportunities
+          Software Engineer &bull; Tech Solutions &bull; Open for Collaboration
         </motion.div>
 
         <motion.h1
@@ -122,10 +143,10 @@ export default function App() {
           className="flex flex-wrap justify-center items-center gap-4 mb-16"
         >
           <a
-            href="#projects"
+            href="#contact"
             className="px-6 py-3 rounded-xl bg-gradient-to-r from-teal-500 to-cyan-500 text-slate-950 font-bold text-sm shadow-lg shadow-cyan-500/20 hover:scale-[1.02] transition"
           >
-            Explore Projects
+            Let's Collaborate
           </a>
           <a
             href={personalDetails.resumeDriveUrl}
@@ -175,8 +196,105 @@ export default function App() {
         </motion.div>
       </section>
 
+      {/* Collaboration Callout Banner */}
+      <section className="px-6 max-w-5xl mx-auto mb-16">
+        <motion.div
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true }}
+          variants={fadeIn}
+          className="relative overflow-hidden rounded-3xl p-8 md:p-10 border border-teal-500/30 bg-gradient-to-r from-slate-900/90 via-teal-950/30 to-slate-900/90 backdrop-blur-xl shadow-2xl shadow-cyan-950/40"
+        >
+          <div className="flex flex-col md:flex-row items-center justify-between gap-6">
+            <div className="text-left max-w-2xl">
+              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-teal-500/10 border border-teal-500/30 text-teal-300 text-xs font-semibold mb-3">
+                <Handshake size={14} className="text-teal-400" />
+                {collaborationBanner.status}
+              </div>
+              <h3 className="text-2xl md:text-3xl font-extrabold text-white mb-2">
+                {collaborationBanner.heading}
+              </h3>
+              <p className="text-sm text-slate-300 leading-relaxed">
+                {collaborationBanner.text}
+              </p>
+            </div>
+            <a
+              href="#contact"
+              className="whitespace-nowrap px-6 py-3 rounded-xl bg-gradient-to-r from-teal-400 to-cyan-400 text-slate-950 font-bold text-sm hover:scale-105 transition shadow-lg shadow-teal-500/25"
+            >
+              Start a Project &rarr;
+            </a>
+          </div>
+        </motion.div>
+      </section>
+
+      {/* Services & Solutions Section */}
+      <section id="services" className="py-20 px-6 max-w-6xl mx-auto border-t border-slate-800/80">
+        <div className="flex flex-col items-center text-center mb-16">
+          <span className="text-xs font-mono uppercase tracking-widest text-teal-400 mb-2">Capabilities & Offerings</span>
+          <h2 className="text-3xl sm:text-4xl font-extrabold flex items-center gap-3">
+            <Sparkles className="text-teal-400" /> Services & Solutions
+          </h2>
+          <p className="text-sm text-slate-400 max-w-xl mt-3">
+            Specialized solutions ranging from enterprise software to custom smart products and modern AI media.
+          </p>
+        </div>
+
+        <motion.div
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true }}
+          variants={staggerContainer}
+          className="grid grid-cols-1 md:grid-cols-3 gap-6"
+        >
+          {services.map((srv, i) => (
+            <motion.div
+              key={i}
+              variants={fadeIn}
+              className="group relative flex flex-col justify-between p-7 rounded-2xl bg-gradient-to-b from-slate-900/80 to-slate-900/40 border border-slate-800 hover:border-cyan-500/50 transition-all duration-300 hover:-translate-y-1.5 hover:shadow-2xl hover:shadow-cyan-950/40 backdrop-blur-sm"
+            >
+              <div>
+                <div className="flex items-center justify-between mb-4">
+                  <div className="p-3 rounded-xl bg-slate-800/70 border border-slate-700/50 group-hover:scale-110 transition">
+                    {getServiceIcon(i)}
+                  </div>
+                  <span className="text-[11px] font-mono px-2.5 py-0.5 rounded-full bg-teal-500/10 text-teal-300 border border-teal-500/20">
+                    {srv.badge}
+                  </span>
+                </div>
+                <h3 className="text-xl font-bold text-white group-hover:text-cyan-300 transition mb-2">
+                  {srv.title}
+                </h3>
+                <p className="text-xs font-mono text-teal-400/90 mb-3">{srv.category}</p>
+                <p className="text-sm text-slate-300 leading-relaxed mb-6 font-normal">
+                  {srv.description}
+                </p>
+              </div>
+
+              <div>
+                <ul className="space-y-2 pt-4 border-t border-slate-800/80 mb-6 text-xs text-slate-300">
+                  {srv.features.map((feat, fIdx) => (
+                    <li key={fIdx} className="flex items-center gap-2">
+                      <Check size={14} className="text-teal-400 shrink-0" />
+                      <span>{feat}</span>
+                    </li>
+                  ))}
+                </ul>
+
+                <a
+                  href="#contact"
+                  className="inline-flex items-center gap-1.5 text-xs font-semibold text-teal-400 hover:text-cyan-300 transition"
+                >
+                  Inquire for Service <ArrowUpRight size={14} />
+                </a>
+              </div>
+            </motion.div>
+          ))}
+        </motion.div>
+      </section>
+
       {/* Experience Section */}
-      <section id="experience" className="py-20 px-6 max-w-5xl mx-auto">
+      <section id="experience" className="py-20 px-6 max-w-5xl mx-auto border-t border-slate-800/80">
         <div className="flex flex-col items-center text-center mb-16">
           <span className="text-xs font-mono uppercase tracking-widest text-teal-400 mb-2">Track Record</span>
           <h2 className="text-3xl sm:text-4xl font-extrabold flex items-center gap-3">
@@ -230,7 +348,7 @@ export default function App() {
       </section>
 
       {/* Featured Projects Section */}
-      <section id="projects" className="py-20 px-6 max-w-6xl mx-auto">
+      <section id="projects" className="py-20 px-6 max-w-6xl mx-auto border-t border-slate-800/80">
         <div className="flex flex-col items-center text-center mb-16">
           <span className="text-xs font-mono uppercase tracking-widest text-teal-400 mb-2">Engineering Portfolio</span>
           <h2 className="text-3xl sm:text-4xl font-extrabold flex items-center gap-3">
@@ -287,7 +405,7 @@ export default function App() {
       </section>
 
       {/* Skills Matrix */}
-      <section id="skills" className="py-20 px-6 max-w-6xl mx-auto">
+      <section id="skills" className="py-20 px-6 max-w-6xl mx-auto border-t border-slate-800/80">
         <div className="flex flex-col items-center text-center mb-16">
           <span className="text-xs font-mono uppercase tracking-widest text-teal-400 mb-2">Technical Arsenal</span>
           <h2 className="text-3xl sm:text-4xl font-extrabold flex items-center gap-3">
@@ -324,7 +442,7 @@ export default function App() {
       </section>
 
       {/* Education */}
-      <section id="education" className="py-20 px-6 max-w-4xl mx-auto">
+      <section id="education" className="py-20 px-6 max-w-4xl mx-auto border-t border-slate-800/80">
         <div className="flex flex-col items-center text-center mb-16">
           <span className="text-xs font-mono uppercase tracking-widest text-teal-400 mb-2">Qualifications</span>
           <h2 className="text-3xl sm:text-4xl font-extrabold flex items-center gap-3">
@@ -358,10 +476,10 @@ export default function App() {
       {/* Contact Section */}
       <section id="contact" className="py-24 px-6 max-w-4xl mx-auto text-center border-t border-slate-800/80">
         <h2 className="text-3xl sm:text-5xl font-extrabold mb-4">
-          Let's Build Something <span className="bg-gradient-to-r from-teal-400 to-cyan-400 bg-clip-text text-transparent">Exceptional</span>
+          Ready to Collaborate? Let's <span className="bg-gradient-to-r from-teal-400 to-cyan-400 bg-clip-text text-transparent">Connect</span>
         </h2>
         <p className="text-slate-400 text-base max-w-xl mx-auto mb-10">
-          Feel free to reach out for backend engineering roles, collaborations, or technical consultations.
+          Reach out directly for enterprise software development, smart NFC solutions, AI promo creatives, or project collaborations.
         </p>
 
         <div className="flex flex-wrap justify-center gap-6 text-sm mb-12">

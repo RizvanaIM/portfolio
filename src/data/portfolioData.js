@@ -9,7 +9,7 @@ export const personalDetails = {
   github: "https://github.com/RizvanaIM",
   linkedin: "https://www.linkedin.com/in/rizvana-im2001",
   resumeDriveUrl: "https://drive.google.com/file/d/1eRTEwpcVj0R4Et7ZNPeRVn3sHPHZJZ2h/view?usp=drivesdk",
-  bio: "BSc (Hons) Software Engineering undergraduate with specialized industry internship experience in architecting robust Spring Boot microservices, high-performance RESTful APIs, and relational persistence layers. Proven experience in containerized CI/CD environments and enterprise ERP workflows."
+  bio: "BSc (Hons) Software Engineering graduate with hands-on experience in Java, Spring Boot, REST APIs, databases, Docker, CI/CD, and ERP systems. Passionate about building practical software solutions and learning new technologies."
 };
 
 export const stats = [
@@ -125,4 +125,38 @@ export const educationList = [
     period: "2020",
     focus: "Bio System Technology Stream"
   }
+
 ];
+
+  // Append this to src/data/portfolioData.js
+
+export const services = [
+  {
+    title: "Smart NFC Cards & Keytags",
+    category: "Digital Identity & Contactless Tech",
+    description: "Custom smart NFC business cards and digital keytags. One-tap contact sharing, portfolio links, and social profile connectivity without needing any app.",
+    features: ["Instant Tap-to-Share", "Custom Business Branding", "Durable Smart Keytags", "Zero App Requirement"],
+    badge: "Hardware & Digital"
+  },
+  {
+    title: "Business Websites & Software Solutions",
+    category: "Full-Stack Development & Architecture",
+    description: "Tailor-made, high-speed corporate websites, enterprise ERP workflows (Odoo), and scalable backend software systems built with Spring Boot & React.",
+    features: ["Custom Web Platforms", "RESTful API Architecture", "ERP & Inventory Systems", "SEO & Cloud Deployment"],
+    badge: "Core Engineering"
+  },
+  {
+    title: "AI Commercials, Video & Voice Creations",
+    category: "Generative AI Media Production",
+    description: "High-impact AI promotional video ads, realistic AI voiceover narration, and commercial marketing visuals tailored for brands and social campaigns.",
+    features: ["Cinematic Promo Ads", "Natural AI Voiceovers", "Social Media Creatives", "Rapid Turnaround"],
+    badge: "Next-Gen AI"
+  }
+];
+
+
+export const collaborationBanner = {
+  status: "Open for Collaboration & Client Projects",
+  heading: "Have an Idea or Project in Mind? Let's Collaborate!",
+  text: "Whether you need custom software development, high-impact business websites, smart NFC solutions, or AI promotional creatives — I'm ready to team up and bring your vision to life."
+};
