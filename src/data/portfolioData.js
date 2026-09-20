@@ -160,3 +160,70 @@ export const collaborationBanner = {
   heading: "Have an Idea or Project in Mind? Let's Collaborate!",
   text: "Whether you need custom software development, high-impact business websites, smart NFC solutions, or AI promotional creatives — I'm ready to team up and bring your vision to life."
 };
+
+// Append this to src/data/portfolioData.js
+
+export const nfcSamples = [
+  {
+    id: "stealth-gold",
+    title: "Stealth Matte Black & Gold Foil",
+    type: "Luxury NFC Business Card",
+    material: "Premium Matte PVC / Metal Composite",
+    chip: "NTAG216 (High Capacity & Universal Tap)",
+    description: "Designed for executives, founders, and consultants. Features laser-sharp gold foil hot-stamping, embedded contactless chip, and an ultra-durable fingerprint-resistant matte finish.",
+    specs: ["Instant Contact Sharing", "Gold Foil Engraved Details", "Waterproof & Scratch-Resistant", "No Battery Required"],
+    theme: {
+      bg: "from-zinc-900 via-black to-zinc-950",
+      accent: "#f59e0b",
+      border: "border-amber-500/40",
+      chipColor: "#fbbf24"
+    }
+  },
+  {
+    id: "cyber-glass",
+    title: "Cyber Emerald & Frosted Acrylic",
+    type: "Tech & Creator Edition",
+    material: "Semi-Translucent Frosted Acrylic",
+    chip: "NTAG215 / Universal Smartphone Sync",
+    description: "Futuristic translucent design displaying simulated internal copper antenna coils. Ideal for software engineers, digital creators, and tech innovators.",
+    specs: ["Visible Micro-Antenna Traces", "Neon Glow Accent Lines", "Dynamic Web Portfolio Sync", "Matte Frosted Grip"],
+    theme: {
+      bg: "from-slate-900/90 via-teal-950/70 to-slate-950",
+      accent: "#14b8a6",
+      border: "border-teal-400/50",
+      chipColor: "#2dd4bf"
+    }
+  },
+  {
+    id: "pearl-silver",
+    title: "Pearl White & Platinum Mirror",
+    type: "Corporate Minimalist Edition",
+    material: "Reinforced Ceramic-Touch PVC",
+    chip: "NTAG213 / Universal Compatibility",
+    description: "Clean, minimalist aesthetic with reflective platinum silver debossing and a built-in high-contrast dynamic QR backup.",
+    specs: ["Mirror Silver Accents", "QR Backup on Reverse", "Anti-Smudge Coating", "Clean Scandinavian Aesthetic"],
+    theme: {
+      bg: "from-slate-100 via-slate-200 to-slate-300",
+      accent: "#0ea5e9",
+      border: "border-slate-300",
+      chipColor: "#94a3b8",
+      darkText: true
+    }
+  },
+  {
+    id: "epoxy-keytag",
+    title: "Smart Epoxy Tap Keytag",
+    type: "Portable Keychain & Bag Tag",
+    material: "Crystal Drop Epoxy + Steel Ring",
+    chip: "NTAG216 High Frequency",
+    description: "Compact, pocket-sized NFC keytag. Attach to car keys, backpacks, or lanyards to share your social profiles, digital portfolio, or business contact anywhere on the go.",
+    specs: ["Compact 30mm x 50mm Form", "High-Gloss Glassy Epoxy Finish", "Heavy-Duty Keyring Hole", "100% Shockproof & Waterproof"],
+    theme: {
+      bg: "from-teal-950 via-slate-900 to-cyan-950",
+      accent: "#06b6d4",
+      border: "border-cyan-400/50",
+      chipColor: "#38bdf8",
+      isKeytag: true
+    }
+  }
+];

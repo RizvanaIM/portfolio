@@ -1,9 +1,10 @@
-import React from 'react';
-import { motion } from 'framer-motion';
+import React, { useState } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
 import { 
   personalDetails, 
   stats, 
   services,
+  nfcSamples,
   collaborationBanner,
   experiences, 
   projects, 
@@ -26,7 +27,11 @@ import {
   Globe,
   Video,
   Handshake,
-  Check
+  Check,
+  X,
+  Radio,
+  Eye,
+  ShoppingBag
 } from 'lucide-react';
 
 // Official GitHub & LinkedIn SVG Icons
@@ -45,7 +50,112 @@ const LinkedinIcon = ({ size = 20, className = "" }) => (
   </svg>
 );
 
+// Realistic Contactless RFID Waves SVG
+const ContactlessWave = ({ color = "#fbbf24", size = 24 }) => (
+  <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke={color} strokeWidth="2.2" strokeLinecap="round">
+    <path d="M5 8.5C7.5 6 11.5 6 14 8.5" />
+    <path d="M2.5 12C6 8.5 13 8.5 16.5 12" />
+    <path d="M7.5 15.5C9 14 11 14 12.5 15.5" />
+  </svg>
+);
+
+// Realistic Gold / Silver Microchip SVG
+const SmartChip = ({ color = "#fbbf24" }) => (
+  <div className="w-11 h-9 rounded border border-amber-400/40 bg-gradient-to-br from-amber-300 via-amber-400 to-amber-600 shadow-inner relative overflow-hidden flex items-center justify-center p-0.5">
+    <div className="w-full h-full border border-amber-800/30 rounded flex flex-col justify-between p-0.5 opacity-90">
+      <div className="flex justify-between h-2 border-b border-amber-900/30">
+        <div className="w-2 border-r border-amber-900/30"></div>
+        <div className="w-2 border-l border-amber-900/30"></div>
+      </div>
+      <div className="w-3 h-2 rounded-full border border-amber-900/40 mx-auto"></div>
+      <div className="flex justify-between h-2 border-t border-amber-900/30">
+        <div className="w-2 border-r border-amber-900/30"></div>
+        <div className="w-2 border-l border-amber-900/30"></div>
+      </div>
+    </div>
+  </div>
+);
+
+// Realistic NFC Card & Keytag Visualizer Component
+const NfcRealisticMockup = ({ sample }) => {
+  const isDark = !sample.theme.darkText;
+  const isKeytag = sample.theme.isKeytag;
+
+  if (isKeytag) {
+    return (
+      <div className="relative mx-auto w-48 h-72 rounded-[40px] p-6 bg-gradient-to-b from-slate-900 via-teal-950 to-black border-2 border-cyan-400/60 shadow-2xl shadow-cyan-500/20 flex flex-col items-center justify-between text-center overflow-hidden">
+        {/* Keyring hole */}
+        <div className="w-6 h-6 rounded-full bg-slate-950 border-2 border-slate-600 shadow-inner flex items-center justify-center">
+          <div className="w-3 h-3 rounded-full bg-slate-800" />
+        </div>
+
+        {/* Shiny epoxy reflection */}
+        <div className="absolute top-0 right-0 w-full h-1/2 bg-gradient-to-b from-white/10 to-transparent pointer-events-none rounded-t-[40px]" />
+
+        <div className="my-auto flex flex-col items-center">
+          <div className="p-3 rounded-full bg-cyan-500/10 border border-cyan-400/40 mb-3 animate-pulse">
+            <Radio size={28} className="text-cyan-400" />
+          </div>
+          <div className="text-sm font-extrabold tracking-widest text-white uppercase">TAP TO CONNECT</div>
+          <div className="text-[10px] font-mono text-cyan-400 mt-1">NTAG216 ACTIVE</div>
+        </div>
+
+        <div className="w-full text-center pb-2">
+          <div className="text-xs font-bold text-slate-200">{personalDetails.name}</div>
+          <div className="text-[9px] text-slate-400 uppercase tracking-wider">Smart Digital Badge</div>
+        </div>
+      </div>
+    );
+  }
+
+  return (
+    <div
+      className={`relative mx-auto w-full max-w-sm aspect-[1.586/1] rounded-2xl p-6 bg-gradient-to-br ${sample.theme.bg} ${sample.theme.border} border shadow-2xl overflow-hidden flex flex-col justify-between transition-all duration-300`}
+    >
+      {/* Glossy Sheen Overlay */}
+      <div className="absolute top-0 -left-1/2 w-[200%] h-[70%] bg-gradient-to-b from-white/10 via-white/5 to-transparent rotate-12 pointer-events-none" />
+
+      {/* Top row: Chip + Contactless wave */}
+      <div className="flex items-center justify-between relative z-10">
+        <SmartChip color={sample.theme.chipColor} />
+        <div className="flex items-center gap-2">
+          <span className={`text-[10px] font-mono tracking-widest uppercase ${isDark ? 'text-slate-400' : 'text-slate-600'}`}>
+            NFC ENABLED
+          </span>
+          <ContactlessWave color={sample.theme.accent} size={22} />
+        </div>
+      </div>
+
+      {/* Middle row: Brand & Technology */}
+      <div className="relative z-10 my-auto">
+        <div className={`text-xs font-mono tracking-widest uppercase opacity-70 ${isDark ? 'text-slate-300' : 'text-slate-700'}`}>
+          {sample.type}
+        </div>
+        <div className={`text-xl sm:text-2xl font-black tracking-wider uppercase mt-1 ${isDark ? 'text-white' : 'text-slate-900'}`}>
+          {personalDetails.name}
+        </div>
+        <div className="text-xs font-semibold text-teal-400 mt-0.5">
+          Backend Engineer &bull; Tech Solutions
+        </div>
+      </div>
+
+      {/* Bottom row: Tap notice and security ID */}
+      <div className="flex items-center justify-between relative z-10 pt-2 border-t border-white/10">
+        <div className={`text-[10px] font-mono ${isDark ? 'text-slate-400' : 'text-slate-600'}`}>
+          Universal Tap &bull; iOS & Android
+        </div>
+        <div className="text-[9px] font-mono px-2 py-0.5 rounded bg-black/40 text-cyan-300 border border-white/10">
+          {sample.chip.split(' ')[0]}
+        </div>
+      </div>
+    </div>
+  );
+};
+
 export default function App() {
+  const [isNfcModalOpen, setIsNfcModalOpen] = useState(false);
+  const [selectedSampleIndex, setSelectedSampleIndex] = useState(0);
+
   const fadeIn = {
     hidden: { opacity: 0, y: 24 },
     visible: { opacity: 1, y: 0, transition: { duration: 0.6, ease: "easeOut" } }
@@ -72,15 +182,17 @@ export default function App() {
     }
   };
 
+  const currentSample = nfcSamples[selectedSampleIndex];
+
   return (
     <div className="relative min-h-screen bg-[#030712] text-slate-100 overflow-hidden">
-      {/* Background Radial Glows */}
+      {/* Background Glows */}
       <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[800px] h-[500px] bg-gradient-to-tr from-cyan-600/20 via-teal-500/15 to-emerald-500/10 blur-[130px] rounded-full pointer-events-none -z-10" />
       <div className="absolute top-[35%] right-[-150px] w-[500px] h-[500px] bg-cyan-700/10 blur-[150px] rounded-full pointer-events-none -z-10" />
       <div className="absolute top-[65%] left-[-150px] w-[500px] h-[500px] bg-emerald-600/10 blur-[150px] rounded-full pointer-events-none -z-10" />
 
       {/* Floating Modern Header */}
-      <header className="fixed top-4 inset-x-0 z-50 flex justify-center px-4">
+      <header className="fixed top-4 inset-x-0 z-40 flex justify-center px-4">
         <nav className="flex items-center gap-6 px-6 py-3 rounded-full bg-slate-900/70 border border-slate-800/80 backdrop-blur-xl shadow-2xl shadow-cyan-950/20 text-sm">
           <a href="#" className="font-bold tracking-tight bg-gradient-to-r from-teal-400 to-cyan-400 bg-clip-text text-transparent">
             {personalDetails.name}
@@ -149,7 +261,6 @@ export default function App() {
             Let's Collaborate
           </a>
 
-          {/* Connected to your Drive CV */}
           <a
             href={personalDetails.resumeDriveUrl}
             target="_blank"
@@ -159,7 +270,6 @@ export default function App() {
             <Download size={16} className="text-teal-400 group-hover:-translate-y-0.5 transition" /> Download CV
           </a>
 
-          {/* Direct Quick Call Button in Hero */}
           <a
             href={`tel:${personalDetails.phone}`}
             className="inline-flex items-center gap-2 px-5 py-3 rounded-xl border border-teal-500/30 bg-teal-950/30 hover:bg-teal-900/50 text-teal-300 text-sm font-semibold backdrop-blur-md transition group"
@@ -293,12 +403,22 @@ export default function App() {
                   ))}
                 </ul>
 
-                <a
-                  href="#contact"
-                  className="inline-flex items-center gap-1.5 text-xs font-semibold text-teal-400 hover:text-cyan-300 transition"
-                >
-                  Inquire for Service <ArrowUpRight size={14} />
-                </a>
+                {/* If it's the NFC Service, show "View Sample Designs" Gallery Trigger */}
+                {i === 0 ? (
+                  <button
+                    onClick={() => setIsNfcModalOpen(true)}
+                    className="w-full flex items-center justify-center gap-2 px-4 py-2.5 rounded-xl bg-cyan-500/10 hover:bg-cyan-500/20 border border-cyan-500/30 hover:border-cyan-400 text-cyan-300 text-xs font-bold transition shadow-lg shadow-cyan-950/30"
+                  >
+                    <Eye size={15} /> View Sample Designs &amp; Mockups
+                  </button>
+                ) : (
+                  <a
+                    href="#contact"
+                    className="inline-flex items-center gap-1.5 text-xs font-semibold text-teal-400 hover:text-cyan-300 transition"
+                  >
+                    Inquire for Service <ArrowUpRight size={14} />
+                  </a>
+                )}
               </div>
             </motion.div>
           ))}
@@ -536,6 +656,97 @@ export default function App() {
           Designed & Engineered with React, Vite & Tailwind CSS &bull; Deployed via Cloudflare / Vercel
         </div> */}
       </section>
+
+      {/* Interactive NFC Sample Designs Gallery Modal */}
+      <AnimatePresence>
+        {isNfcModalOpen && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/80 backdrop-blur-md"
+            onClick={() => setIsNfcModalOpen(false)}
+          >
+            <motion.div
+              initial={{ scale: 0.95, opacity: 0 }}
+              animate={{ scale: 1, opacity: 1 }}
+              exit={{ scale: 0.95, opacity: 0 }}
+              className="relative w-full max-w-3xl rounded-3xl bg-slate-900 border border-slate-700/80 p-6 md:p-8 shadow-2xl overflow-hidden max-h-[90vh] overflow-y-auto"
+              onClick={(e) => e.stopPropagation()}
+            >
+              {/* Close Button */}
+              <button
+                onClick={() => setIsNfcModalOpen(false)}
+                className="absolute top-5 right-5 p-2 rounded-full bg-slate-800 text-slate-300 hover:text-white hover:bg-slate-700 transition"
+                title="Close"
+              >
+                <X size={20} />
+              </button>
+
+              <div className="mb-6">
+                <span className="text-xs font-mono uppercase tracking-widest text-cyan-400">Interactive Showcase</span>
+                <h3 className="text-2xl font-bold text-white mt-1">Smart NFC Products &amp; Designs</h3>
+                <p className="text-xs text-slate-400 mt-1">
+                  Realistic digital preview of custom contactless cards and tags available for businesses and personal brands.
+                </p>
+              </div>
+
+              {/* Realistic Mockup Display Area */}
+              <div className="p-8 rounded-2xl bg-[#030712] border border-slate-800 flex items-center justify-center mb-6">
+                <NfcRealisticMockup sample={currentSample} />
+              </div>
+
+              {/* Design Details & Specs */}
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+                <div>
+                  <h4 className="text-lg font-bold text-white mb-1">{currentSample.title}</h4>
+                  <div className="text-xs font-mono text-teal-400 mb-2">{currentSample.type} &bull; {currentSample.chip}</div>
+                  <p className="text-xs text-slate-300 leading-relaxed mb-4">{currentSample.description}</p>
+                </div>
+                <div>
+                  <div className="text-xs font-mono text-slate-400 uppercase tracking-wider mb-2">Specifications:</div>
+                  <ul className="space-y-1.5 text-xs text-slate-300">
+                    {currentSample.specs.map((sp, idx) => (
+                      <li key={idx} className="flex items-center gap-2">
+                        <CheckCircle2 size={13} className="text-teal-400 shrink-0" />
+                        <span>{sp}</span>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              </div>
+
+              {/* Thumbnail Selector & Order Button */}
+              <div className="pt-4 border-t border-slate-800 flex flex-col sm:flex-row items-center justify-between gap-4">
+                {/* Thumbnails */}
+                <div className="flex gap-2">
+                  {nfcSamples.map((s, idx) => (
+                    <button
+                      key={s.id}
+                      onClick={() => setSelectedSampleIndex(idx)}
+                      className={`px-3 py-1.5 rounded-lg text-xs font-mono transition border ${
+                        selectedSampleIndex === idx
+                          ? 'bg-cyan-500/20 border-cyan-400 text-cyan-300 font-bold'
+                          : 'bg-slate-800/60 border-slate-700 text-slate-400 hover:text-slate-200'
+                      }`}
+                    >
+                      0{idx + 1}
+                    </button>
+                  ))}
+                </div>
+
+                {/* Direct Order / Inquire Button */}
+                <a
+                  href={`mailto:${personalDetails.email}?subject=NFC%20Design%20Order%20-%20${encodeURIComponent(currentSample.title)}&body=Hi%20Rizvana,%0D%0A%0D%0AI%20am%20interested%20in%20ordering%20the%20${encodeURIComponent(currentSample.title)}%20NFC%20product.`}
+                  className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-6 py-2.5 rounded-xl bg-gradient-to-r from-teal-400 to-cyan-400 text-slate-950 font-bold text-xs shadow-lg shadow-cyan-500/20 hover:scale-105 transition"
+                >
+                  <ShoppingBag size={14} /> Inquire / Order This Design
+                </a>
+              </div>
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </div>
   );
 }
