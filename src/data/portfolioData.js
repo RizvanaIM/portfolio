@@ -5,10 +5,11 @@ export const personalDetails = {
   headline: "Backend Software Engineer & Spring Boot Specialist",
   location: "Battaramulla, Sri Lanka",
   email: "rizvanaisam@gmail.com",
-  phone: "+94 74 363 1536",
+  phone: "+94743631536", // Direct tel dialer format
+  displayPhone: "+94 74 363 1536", // Clean visual format
   github: "https://github.com/RizvanaIM",
   linkedin: "https://www.linkedin.com/in/rizvana-im2001",
-  resumeDriveUrl: "https://drive.google.com/file/d/1eRTEwpcVj0R4Et7ZNPeRVn3sHPHZJZ2h/view?usp=drivesdk",
+  resumeDriveUrl: "https://drive.google.com/file/d/17-DnNT5lReSVvmSK4meIxhtamKEIJeIA/view?usp=sharing",
   bio: "BSc (Hons) Software Engineering graduate with hands-on experience in Java, Spring Boot, REST APIs, databases, Docker, CI/CD, and ERP systems. Passionate about building practical software solutions and learning new technologies."
 };
 
@@ -128,7 +129,6 @@ export const educationList = [
 
 ];
 
-  // Append this to src/data/portfolioData.js
 
 export const services = [
   {

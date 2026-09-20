@@ -13,7 +13,7 @@ import {
 import { 
   Mail, 
   MapPin, 
-  Phone, 
+  PhoneCall, 
   Briefcase, 
   GraduationCap, 
   Code2, 
@@ -74,7 +74,7 @@ export default function App() {
 
   return (
     <div className="relative min-h-screen bg-[#030712] text-slate-100 overflow-hidden">
-      {/* Dynamic Background Glows */}
+      {/* Background Radial Glows */}
       <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[800px] h-[500px] bg-gradient-to-tr from-cyan-600/20 via-teal-500/15 to-emerald-500/10 blur-[130px] rounded-full pointer-events-none -z-10" />
       <div className="absolute top-[35%] right-[-150px] w-[500px] h-[500px] bg-cyan-700/10 blur-[150px] rounded-full pointer-events-none -z-10" />
       <div className="absolute top-[65%] left-[-150px] w-[500px] h-[500px] bg-emerald-600/10 blur-[150px] rounded-full pointer-events-none -z-10" />
@@ -148,14 +148,26 @@ export default function App() {
           >
             Let's Collaborate
           </a>
+
+          {/* Connected to your Drive CV */}
           <a
             href={personalDetails.resumeDriveUrl}
             target="_blank"
-            rel="noreferrer"
-            className="inline-flex items-center gap-2 px-6 py-3 rounded-xl border border-slate-700 bg-slate-900/60 hover:bg-slate-800/80 text-slate-200 text-sm font-semibold backdrop-blur-md hover:border-cyan-500/40 transition"
+            rel="noopener noreferrer"
+            className="inline-flex items-center gap-2 px-6 py-3 rounded-xl border border-slate-700 bg-slate-900/60 hover:bg-slate-800/80 text-slate-200 text-sm font-semibold backdrop-blur-md hover:border-cyan-500/40 transition group"
           >
-            <Download size={16} /> Download CV
+            <Download size={16} className="text-teal-400 group-hover:-translate-y-0.5 transition" /> Download CV
           </a>
+
+          {/* Direct Quick Call Button in Hero */}
+          <a
+            href={`tel:${personalDetails.phone}`}
+            className="inline-flex items-center gap-2 px-5 py-3 rounded-xl border border-teal-500/30 bg-teal-950/30 hover:bg-teal-900/50 text-teal-300 text-sm font-semibold backdrop-blur-md transition group"
+            title="Direct Call"
+          >
+            <PhoneCall size={16} className="text-teal-400 group-hover:rotate-12 transition" /> Call Now
+          </a>
+
           <div className="flex gap-2">
             <a
               href={personalDetails.github}
@@ -482,27 +494,47 @@ export default function App() {
           Reach out directly for enterprise software development, smart NFC solutions, AI promo creatives, or project collaborations.
         </p>
 
-        <div className="flex flex-wrap justify-center gap-6 text-sm mb-12">
+        {/* Interactive Action Buttons */}
+        <div className="flex flex-wrap justify-center gap-5 text-sm mb-12">
+          {/* Working Mail Compose Link */}
           <a
-            href={`mailto:${personalDetails.email}`}
-            className="flex items-center gap-2.5 px-5 py-3 rounded-xl bg-slate-900/60 border border-slate-800 hover:border-cyan-500/50 text-slate-200 transition"
+            href={`mailto:${personalDetails.email}?subject=Project%20Inquiry%20/%20Collaboration&body=Hi%20Rizvana,%0D%0A%0D%0AI%20am%20reaching%20out%20regarding...`}
+            className="flex items-center gap-3 px-6 py-3.5 rounded-2xl bg-slate-900/70 border border-slate-800 hover:border-cyan-500 hover:bg-slate-800/90 text-slate-200 transition group shadow-lg shadow-cyan-950/20"
+            title="Click to Compose Email"
           >
-            <Mail size={18} className="text-cyan-400" />
-            {personalDetails.email}
+            <Mail size={20} className="text-cyan-400 group-hover:scale-110 transition" />
+            <div className="text-left">
+              <div className="text-[10px] uppercase font-mono text-slate-400 tracking-wider">Email Me</div>
+              <div className="font-semibold text-white">{personalDetails.email}</div>
+            </div>
           </a>
-          <span className="flex items-center gap-2.5 px-5 py-3 rounded-xl bg-slate-900/60 border border-slate-800 text-slate-200">
-            <Phone size={18} className="text-teal-400" />
-            {personalDetails.phone}
-          </span>
-          <span className="flex items-center gap-2.5 px-5 py-3 rounded-xl bg-slate-900/60 border border-slate-800 text-slate-200">
-            <MapPin size={18} className="text-emerald-400" />
-            {personalDetails.location}
-          </span>
+
+          {/* Working Click-to-Call Dialer Link */}
+          <a
+            href={`tel:${personalDetails.phone}`}
+            className="flex items-center gap-3 px-6 py-3.5 rounded-2xl bg-slate-900/70 border border-slate-800 hover:border-teal-500 hover:bg-slate-800/90 text-slate-200 transition group shadow-lg shadow-teal-950/20"
+            title="Click to Call Direct"
+          >
+            <PhoneCall size={20} className="text-teal-400 group-hover:scale-110 group-hover:rotate-12 transition" />
+            <div className="text-left">
+              <div className="text-[10px] uppercase font-mono text-slate-400 tracking-wider">Call / WhatsApp</div>
+              <div className="font-semibold text-white">{personalDetails.displayPhone}</div>
+            </div>
+          </a>
+
+          {/* Location Badge */}
+          <div className="flex items-center gap-3 px-6 py-3.5 rounded-2xl bg-slate-900/40 border border-slate-800/70 text-slate-300">
+            <MapPin size={20} className="text-emerald-400 shrink-0" />
+            <div className="text-left">
+              <div className="text-[10px] uppercase font-mono text-slate-400 tracking-wider">Location</div>
+              <div className="font-semibold text-slate-200">{personalDetails.location}</div>
+            </div>
+          </div>
         </div>
 
-        <div className="text-xs text-slate-500 font-mono">
-          Designed & Engineered with React, Vite & Tailwind CSS &bull; Deployed on Vercel
-        </div>
+        {/* <div className="text-xs text-slate-500 font-mono">
+          Designed & Engineered with React, Vite & Tailwind CSS &bull; Deployed via Cloudflare / Vercel
+        </div> */}
       </section>
     </div>
   );
