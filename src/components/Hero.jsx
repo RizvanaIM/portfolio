@@ -75,14 +75,14 @@ export default function Hero() {
             >
               Hire Me
             </a> */}
-            <a
+            {/* <a
               href={personalDetails.resumeDriveUrl}
               target="_blank"
               rel="noopener noreferrer"
               className="inline-flex items-center gap-2 px-8 py-3 rounded-xl border border-slate-700 bg-[#242b38]/60 text-slate-200 font-semibold text-sm hover:border-[#00eeff] hover:text-[#00eeff] transition duration-300"
             >
               <Download size={16} /> Download CV
-            </a>
+            </a> */}
           </div>
 
           {/* Bottom Stats Card */}
