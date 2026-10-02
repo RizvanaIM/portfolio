@@ -11,7 +11,7 @@ export const personalDetails = {
   instagramHandle: "@igstar.me",
   github: "https://github.com/RizvanaIM",
   linkedin: "https://www.linkedin.com/in/rizvana-im2001",
-  resumeDriveUrl: "https://drive.google.com/file/d/17-DnNT5lReSVvmSK4meIxhtamKEIJeIA/view?usp=sharing",
+  resumeDriveUrl: "https://drive.google.com/file/d/1MM673af2XefBjLXZTpcRqPBfvPm6g7gQ/view?usp=sharing",
   shortBio: "Software Engineer with a BSc (Hons) in Software Engineering. Specialized in building scalable Java/Spring Boot microservices, enterprise ERP systems, and modern full-stack solutions.",
   fullBio: "Software Engineer with completed degree studies in Software Engineering. Experienced in building robust Spring Boot REST APIs, relational databases, and enterprise workflows through industry internships at ZeroCode Software and Tringledo. Currently focused on engineering high-impact personal projects and actively open for software engineering opportunities and collaborations."
 };
